@@ -17,7 +17,10 @@ const userSchema = new mongoose.Schema({
     password: String
 }); // It's a schema created with using mongoose Schema class( no longer a simple javaScript object)
 
+const secret = "Thisisourlittlesecret.";
+userSchema.plugin(encrypt, { secret: secret, encryptedFields: ["password"] });
 
+const User = mongoose.model("User", userSchema);
 
 app.get("/", function(req, res){
     res.render("home");
